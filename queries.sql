@@ -12386,5 +12386,14 @@
 | Mexican  | 11.80             |
 
 ---
+**Query #9**
+
+    SELECT MIN(order_date) AS min_date, MAX(order_date) AS max_date FROM restaurant_db.order_details;
+
+| min_date   | max_date   |
+| ---------- | ---------- |
+| 2023-01-01 | 2023-03-31 |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/)
