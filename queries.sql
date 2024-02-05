@@ -12395,5 +12395,23 @@
 | 2023-01-01 | 2023-03-31 |
 
 ---
+**Query #10**
+
+    SELECT count(DISTINCT order_id) AS orders FROM restaurant_db.order_details;
+
+| orders |
+| ------ |
+| 5370   |
+
+---
+**Query #11**
+
+    SELECT count(*) AS items FROM restaurant_db.order_details;
+
+| items |
+| ----- |
+| 12234 |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/)
