@@ -12426,13 +12426,13 @@
 
 | order_id | items |
 | -------- | ----- |
-| 3473     | 14    |
-| 4305     | 14    |
 | 2675     | 14    |
 | 1957     | 14    |
 | 440      | 14    |
 | 330      | 14    |
 | 443      | 14    |
+| 3473     | 14    |
+| 4305     | 14    |
 
 ---
 **Query #13**
@@ -12446,6 +12446,58 @@
 | orders_over_12_items |
 | -------------------- |
 | 20                   |
+
+---
+**Query #14**
+
+    SELECT *
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    LIMIT 10;
+
+| order_details_id | order_id | order_date | order_time | item_id | menu_item_id | item_name        | category | price |
+| ---------------- | -------- | ---------- | ---------- | ------- | ------------ | ---------------- | -------- | ----- |
+| 1                | 1        | 2023-01-01 | 11:38:36   | 109     | 109          | Korean Beef Bowl | Asian    | 17.95 |
+| 2                | 2        | 2023-01-01 | 11:57:40   | 108     | 108          | Tofu Pad Thai    | Asian    | 14.50 |
+| 3                | 2        | 2023-01-01 | 11:57:40   | 124     | 124          | Spaghetti        | Italian  | 14.50 |
+| 4                | 2        | 2023-01-01 | 11:57:40   | 117     | 117          | Chicken Burrito  | Mexican  | 12.95 |
+| 5                | 2        | 2023-01-01 | 11:57:40   | 129     | 129          | Mushroom Ravioli | Italian  | 15.50 |
+| 6                | 2        | 2023-01-01 | 11:57:40   | 106     | 106          | French Fries     | American | 7.00  |
+| 7                | 3        | 2023-01-01 | 12:12:28   | 117     | 117          | Chicken Burrito  | Mexican  | 12.95 |
+| 8                | 3        | 2023-01-01 | 12:12:28   | 119     | 119          | Chicken Torta    | Mexican  | 11.95 |
+| 9                | 4        | 2023-01-01 | 12:16:31   | 117     | 117          | Chicken Burrito  | Mexican  | 12.95 |
+| 10               | 5        | 2023-01-01 | 12:21:30   | 117     | 117          | Chicken Burrito  | Mexican  | 12.95 |
+
+---
+**Query #15**
+
+    SELECT item_name, category, count(*) AS times_ordered
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    GROUP BY item_name, category
+    ORDER BY times_ordered ASC
+    LIMIT 1;
+
+| item_name     | category | times_ordered |
+| ------------- | -------- | ------------- |
+| Chicken Tacos | Mexican  | 123           |
+
+---
+**Query #16**
+
+    SELECT item_name, category, count(*) AS times_ordered
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    GROUP BY item_name, category
+    ORDER BY times_ordered DESC
+    LIMIT 1;
+
+| item_name | category | times_ordered |
+| --------- | -------- | ------------- |
+| Hamburger | American | 622           |
 
 ---
 
