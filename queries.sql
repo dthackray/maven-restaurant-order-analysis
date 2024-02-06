@@ -12545,5 +12545,38 @@
 | 1016             | 440      | 2023-01-08 | 12:16:34   | 132     | 132          | Eggplant Parmesan     | Italian  | 16.95 |
 
 ---
+**Query #19**
+
+    SELECT order_id, category, count(item_id) AS num_items
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    WHERE order_id IN(440, 2075, 1957, 330, 2675)
+    GROUP BY order_id, category;
+
+| order_id | category | num_items |
+| -------- | -------- | --------- |
+| 330      | American | 1         |
+| 330      | Asian    | 6         |
+| 330      | Italian  | 3         |
+| 330      | Mexican  | 4         |
+| 440      | American | 2         |
+| 440      | Asian    | 2         |
+| 440      | Italian  | 8         |
+| 440      | Mexican  | 2         |
+| 1957     | American | 3         |
+| 1957     | Asian    | 3         |
+| 1957     | Italian  | 5         |
+| 1957     | Mexican  | 3         |
+| 2075     | American | 1         |
+| 2075     | Asian    | 3         |
+| 2075     | Italian  | 6         |
+| 2075     | Mexican  | 3         |
+| 2675     | American | 3         |
+| 2675     | Asian    | 3         |
+| 2675     | Italian  | 4         |
+| 2675     | Mexican  | 4         |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/dX3fzg2cCRVJLL8XQGjniv/1)
