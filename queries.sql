@@ -12426,13 +12426,13 @@
 
 | order_id | items |
 | -------- | ----- |
+| 3473     | 14    |
+| 4305     | 14    |
 | 2675     | 14    |
 | 1957     | 14    |
 | 440      | 14    |
 | 330      | 14    |
 | 443      | 14    |
-| 3473     | 14    |
-| 4305     | 14    |
 
 ---
 **Query #13**
@@ -12498,6 +12498,51 @@
 | item_name | category | times_ordered |
 | --------- | -------- | ------------- |
 | Hamburger | American | 622           |
+
+---
+**Query #17**
+
+    SELECT order_id, SUM(price) AS order_cost
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    GROUP BY order_id
+    ORDER BY order_cost DESC
+    LIMIT 5;
+
+| order_id | order_cost |
+| -------- | ---------- |
+| 440      | 192.15     |
+| 2075     | 191.05     |
+| 1957     | 190.10     |
+| 330      | 189.70     |
+| 2675     | 185.10     |
+
+---
+**Query #18**
+
+    SELECT *
+    FROM restaurant_db.order_details 
+    LEFT JOIN restaurant_db.menu_items
+    ON restaurant_db.order_details.item_id = restaurant_db.menu_items.menu_item_id
+    WHERE order_id = 440;
+
+| order_details_id | order_id | order_date | order_time | item_id | menu_item_id | item_name             | category | price |
+| ---------------- | -------- | ---------- | ---------- | ------- | ------------ | --------------------- | -------- | ----- |
+| 1003             | 440      | 2023-01-08 | 12:16:34   | 116     | 116          | Steak Tacos           | Mexican  | 13.95 |
+| 1004             | 440      | 2023-01-08 | 12:16:34   | 103     | 103          | Hot Dog               | American | 9.00  |
+| 1005             | 440      | 2023-01-08 | 12:16:34   | 124     | 124          | Spaghetti             | Italian  | 14.50 |
+| 1006             | 440      | 2023-01-08 | 12:16:34   | 125     | 125          | Spaghetti & Meatballs | Italian  | 17.95 |
+| 1007             | 440      | 2023-01-08 | 12:16:34   | 125     | 125          | Spaghetti & Meatballs | Italian  | 17.95 |
+| 1008             | 440      | 2023-01-08 | 12:16:34   | 126     | 126          | Fettuccine Alfredo    | Italian  | 14.50 |
+| 1009             | 440      | 2023-01-08 | 12:16:34   | 126     | 126          | Fettuccine Alfredo    | Italian  | 14.50 |
+| 1010             | 440      | 2023-01-08 | 12:16:34   | 109     | 109          | Korean Beef Bowl      | Asian    | 17.95 |
+| 1011             | 440      | 2023-01-08 | 12:16:34   | 127     | 127          | Meat Lasagna          | Italian  | 17.95 |
+| 1012             | 440      | 2023-01-08 | 12:16:34   | 113     | 113          | Edamame               | Asian    | 5.00  |
+| 1013             | 440      | 2023-01-08 | 12:16:34   | 122     | 122          | Chips & Salsa         | Mexican  | 7.00  |
+| 1014             | 440      | 2023-01-08 | 12:16:34   | 131     | 131          | Chicken Parmesan      | Italian  | 17.95 |
+| 1015             | 440      | 2023-01-08 | 12:16:34   | 106     | 106          | French Fries          | American | 7.00  |
+| 1016             | 440      | 2023-01-08 | 12:16:34   | 132     | 132          | Eggplant Parmesan     | Italian  | 16.95 |
 
 ---
 
