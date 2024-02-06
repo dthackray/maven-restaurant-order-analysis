@@ -12435,5 +12435,18 @@
 | 443      | 14    |
 
 ---
+**Query #13**
+
+    SELECT count(*) AS orders_over_12_items FROM
+    (SELECT order_id, count(item_id) AS num_items
+     FROM restaurant_db.order_details
+     GROUP BY order_id
+     HAVING num_items > 12) AS num_orders;
+
+| orders_over_12_items |
+| -------------------- |
+| 20                   |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/dX3fzg2cCRVJLL8XQGjniv/1)
