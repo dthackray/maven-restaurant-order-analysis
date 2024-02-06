@@ -12413,5 +12413,27 @@
 | 12234 |
 
 ---
+**Query #12**
 
-[View on DB Fiddle](https://www.db-fiddle.com/)
+    SELECT * FROM (
+      SELECT order_id, count(item_id) AS items FROM restaurant_db.order_details 
+      GROUP BY order_id
+      ORDER BY items DESC) AS sub
+    WHERE items = (SELECT MAX(items) FROM (
+      SELECT order_id, count(item_id) AS items FROM restaurant_db.order_details 
+      GROUP BY order_id
+      ORDER BY items DESC) subsub);
+
+| order_id | items |
+| -------- | ----- |
+| 3473     | 14    |
+| 4305     | 14    |
+| 2675     | 14    |
+| 1957     | 14    |
+| 440      | 14    |
+| 330      | 14    |
+| 443      | 14    |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/dX3fzg2cCRVJLL8XQGjniv/1)
